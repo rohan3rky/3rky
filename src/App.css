@@ -1,0 +1,172 @@
+
+/* Cinematic additions - append to App.css or a new file Cinematic.css */
+
+/* --- Color & typography tweaks for director portfolio --- */
+:root{
+  --bg: #06080a;
+  --panel: #0d1113;
+  --muted: #9aa3ad;
+  --primary: #ff6fbf;   /* accent for CTAs */
+  --accent: #7dd3fc;    /* subtle secondary accent */
+  --film-tint: rgba(5,8,12,0.55);
+  --glass-border: rgba(255,255,255,0.04);
+  --radius-lg: 14px;
+  --ease: cubic-bezier(.2,.9,.3,1);
+  --long-anim: 700ms;
+  --short-anim: 320ms;
+  --max-width: 1200px;
+  --grain-opacity: 0.06;
+  --letterbox-height: 6vh; /* letterbox bar height */
+}
+
+/* Larger, cinematic headings */
+h1, .hero-title {
+  font-size: clamp(28px, 5.2vw, 64px);
+  line-height: 1.02;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #fcfcff;
+  text-shadow: 0 12px 30px rgba(2,6,23,0.7);
+  font-family: "Playfair Display", Georgia, serif; /* cinematic serif; fallback to serif */
+}
+h2 { font-size: clamp(20px, 3.2vw, 28px); font-weight:700; color:#f8fafc; }
+p, .muted { color: var(--muted); font-size: 15px; }
+
+/* container */
+.container { width: 92%; max-width: var(--max-width); margin: 0 auto; }
+
+/* FILM GRAIN overlay - put near top of DOM (body or root-level div) */
+.film-grain {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800"><filter id="g"><feTurbulence baseFrequency="0.8" numOctaves="2" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23g)" opacity=".08" fill="black"/></svg>');
+  opacity: var(--grain-opacity);
+  mix-blend-mode: overlay;
+}
+
+/* LETTERBOX bars (top & bottom) for a cinematic frame */
+.letterbox-top,
+.letterbox-bottom {
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: var(--letterbox-height);
+  background: linear-gradient(180deg, rgba(0,0,0,0.95), rgba(0,0,0,0.85));
+  z-index: 9000;
+  pointer-events: none;
+}
+.letterbox-top { top: 0; }
+.letterbox-bottom { bottom: 0; }
+
+/* subtle vignette to focus center */
+.vignette {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9001;
+  background: radial-gradient(60% 50% at 50% 40%, rgba(0,0,0,0) 30%, rgba(0,0,0,0.5) 85%);
+  mix-blend-mode: multiply;
+}
+
+/* Cinematic call-to-action (showreel) */
+.showreel-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px;
+  border-radius: 12px;
+  background: linear-gradient(90deg, rgba(255,111,191,0.08), rgba(125,211,252,0.04));
+  border: 1px solid rgba(255,111,191,0.12);
+  color: var(--primary);
+  font-weight: 700;
+  box-shadow: 0 12px 36px rgba(0,0,0,0.45);
+  transition: transform var(--short-anim) var(--ease), box-shadow var(--short-anim) var(--ease);
+}
+.showreel-btn:hover { transform: translateY(-4px); box-shadow: 0 24px 60px rgba(0,0,0,0.6); }
+
+/* PLAY icon overlay for thumbnails */
+.play-overlay {
+  position: absolute;
+  inset: 0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  pointer-events:none;
+}
+.play-icon {
+  width:64px;height:64px;border-radius:50%;
+  background: linear-gradient(90deg, rgba(255,111,191,0.14), rgba(125,211,252,0.06));
+  display:flex;align-items:center;justify-content:center;color:var(--primary);
+  box-shadow: 0 8px 30px rgba(125,211,252,0.06);
+  transition: transform 260ms var(--ease), opacity 260ms var(--ease);
+}
+.project-card:hover .play-icon { transform: scale(1.06); }
+
+/* ----- REVEAL (scroll) helpers ----- */
+/* default hidden state */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px) scale(0.995);
+  transition: transform var(--long-anim) var(--ease), opacity var(--long-anim) var(--ease);
+  will-change: transform, opacity;
+}
+
+/* visible state when scrolled into view */
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* small variant for quicker reveals (cards) */
+.reveal--fast {
+  transition-duration: 420ms;
+  transition-timing-function: cubic-bezier(.2,.85,.25,1);
+}
+
+/* horizontal reveal (from left or right) */
+.reveal--left { transform: translateX(-20px) scale(0.995); }
+.reveal--right { transform: translateX(20px) scale(0.995); }
+.reveal--left.is-visible, .reveal--right.is-visible { transform: translateX(0) scale(1); }
+
+/* page transition when nav link selected (smooth fade) */
+.page-transition-enter { opacity: 0; transform: translateY(6px); }
+.page-transition-enter-active { opacity: 1; transform: none; transition: opacity 420ms var(--ease), transform 420ms var(--ease); }
+
+/* small film-scan line (moving highlight) for life */
+.film-scan {
+  position: absolute;
+  left: -30%;
+  width: 60%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.04), transparent);
+  transform: rotate(-6deg);
+  animation: scan 6s linear infinite;
+  pointer-events: none;
+}
+@keyframes scan {
+  0% { left: -60%; opacity: 0; }
+  10% { opacity: 1; }
+  50% { left: 100%; opacity: 0.15; }
+  100% { left: 140%; opacity: 0; }
+}
+
+/* App wrapper and small polish */
+.app {
+  min-height: 100vh;
+  background: var(--bg, #06080a);
+  color: #e6eef6;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* keep site-panel slightly elevated in the cinematic frame */
+.site-panel { background: linear-gradient(180deg, rgba(13,17,19,0.96), rgba(8,10,12,0.98)); border-radius: var(--radius-lg); }
+
+/* subtle CTA focus */
+.showreel-btn:focus { outline: 2px solid rgba(125,211,252,0.12); outline-offset: 4px; }
+
+/* helper to hide heavy shadows on mobile */
+@media (max-width: 700px) {
+  .site-panel { box-shadow: 0 8px 20px rgba(0,0,0,0.6); }
+}

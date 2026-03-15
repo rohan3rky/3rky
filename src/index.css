@@ -1,0 +1,96 @@
+/* ---------- site background + panel ---------- */
+/* ensure this file is imported (index.js already imports index.css) */
+
+.site-bg {
+  /* background-image: url("../src/1.jpg"); */
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  min-height: 100vh;        /* ensures it fills viewport */
+  width: 100%;
+  position: relative;       /* creates stacking context for ::before */
+  padding: 60px 0;          /* vertical spacing around the panel */
+  box-sizing: border-box;
+}
+
+/* slight dark overlay so text remains readable on the gutters */
+.site-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.36); /* adjust opacity to taste */
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* the centered dark panel that contains your content */
+.site-panel {
+  position: relative;
+  z-index: 1;                   /* sits above the overlay */
+  width: min(1200px, 94%);
+  margin: 0 auto;
+  padding: 36px 10px;
+  box-sizing: border-box;
+  background: rgba(8,10,12,0.96); /* nearly solid dark panel */
+  border-radius: 12px;            /* optional — shows bg at corners */
+  box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+}
+
+/* make the inner .container use the panel width (prevent full-width dark strips) */
+.container {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* If Projects or About set their own full-width backgrounds, neutralize them */
+.projects, .about {
+  background: transparent !important;
+  padding: 0 !important; /* panel handles spacing */
+}
+
+/* Keep grid/layout rules but placed inside the panel */
+.projects-grid {
+  gap: 22px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* responsive */
+@media (max-width: 1100px) {
+  .projects-grid { grid-template-columns: repeat(2, 1fr); }
+  .site-panel { width: min(960px, 94%); padding: 36px 18px; }
+}
+@media (max-width: 700px) {
+  .projects-grid { grid-template-columns: 1fr; gap: 16px; }
+  .site-panel { width: 94%; padding: 22px 12px; border-radius: 8px; }
+}
+/* REMOVE ALL DEFAULT BROWSER SPACING */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(1200px 800px at 10% 10%, rgba(125,211,252,0.03), transparent), #050506;
+  color: #e6eef6;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Smooth custom scrollbar for desktop */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.06); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.09); }
+
+/* links */
+a { color: var(--primary, #ff6fbf); text-decoration: none; }
+a:hover { text-decoration: underline; }

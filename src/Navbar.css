@@ -1,0 +1,94 @@
+/* Navbar container */
+.navbar {
+  width: 100%;
+  padding: 16px 40px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  background: linear-gradient(
+    180deg,
+    rgba(5, 8, 10, 0.95) 0%,
+    rgba(5, 8, 10, 0.85) 100%
+  );
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(125, 211, 252, 0.1);
+  display: flex;
+  justify-content: flex-start;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+body.modal-open .navbar {
+  display: none;
+}
+
+/* Hide on scroll */
+.navbar.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-100%);
+}
+
+/* Show when at top */
+.navbar.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Inner wrapper */
+.nav-inner {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 30px;
+}
+
+/* Section alignment */
+.nav-section {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* SOCIAL ICON SECTION */
+.social-icons {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  margin-left: auto;
+}
+
+/* ICON WRAPPER with hover effects */
+.icon-wrapper {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 50%;
+  background: rgba(125, 211, 252, 0.05);
+  border: 1px solid rgba(125, 211, 252, 0.1);
+}
+
+.icon-wrapper:hover {
+  background: rgba(125, 211, 252, 0.15);
+  border-color: rgba(125, 211, 252, 0.3);
+  transform: translateY(-3px) scale(1.1);
+  box-shadow: 0 8px 20px rgba(125, 211, 252, 0.2);
+}
+
+.icon-wrapper svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+  color: rgba(255, 255, 255, 0.8);
+  transition: color 0.3s ease;
+}
+
+.icon-wrapper:hover svg {
+  color: #7dd3fc;
+}

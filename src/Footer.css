@@ -1,0 +1,61 @@
+.footer {
+  width: 100%;
+  padding: 48px 0;
+  background: linear-gradient(
+    180deg,
+    rgba(5, 8, 10, 0.3) 0%,
+    rgba(5, 8, 10, 0.9) 100%
+  );
+  backdrop-filter: blur(8px);
+  text-align: center;
+  border-top: 1px solid rgba(125, 211, 252, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Gradient line animation */
+.footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(125, 211, 252, 0.3),
+    transparent
+  );
+  animation: slideGradient 3s ease-in-out infinite;
+}
+
+@keyframes slideGradient {
+  0%, 100% { left: -100%; }
+  50% { left: 100%; }
+}
+
+.footer p {
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 13px;
+  letter-spacing: 0.8px;
+  margin: 0;
+  font-family: Inter, system-ui, sans-serif;
+  font-weight: 300;
+  position: relative;
+  z-index: 1;
+  text-transform: uppercase;
+}
+
+.footer a {
+  color: #7dd3fc;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border-bottom: 1px solid transparent;
+}
+
+.footer a:hover {
+  color: #ff6fbf;
+  border-bottom-color: #ff6fbf;
+}

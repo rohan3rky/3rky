@@ -1,0 +1,220 @@
+/* MAIN ABOUT SECTION */
+.about {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 40px;
+  background: linear-gradient(
+    135deg,
+    rgba(5, 8, 10, 0.8) 0%,
+    rgba(13, 17, 19, 0.6) 100%
+  );
+  backdrop-filter: blur(6px);
+  color: #e6eef6;
+  border-top: 1px solid rgba(125, 211, 252, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Left gradient accent */
+.about::before {
+  content: "";
+  position: absolute;
+  left: -20%;
+  top: 0;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(125, 211, 252, 0.15) 0%,
+    transparent 60%
+  );
+  pointer-events: none;
+  z-index: 0;
+  animation: gradientShift 8s ease-in-out infinite;
+}
+
+/* Right gradient accent */
+.about::after {
+  content: "";
+  position: absolute;
+  right: -20%;
+  top: 0;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(
+    225deg,
+    rgba(255, 111, 191, 0.12) 0%,
+    transparent 60%
+  );
+  pointer-events: none;
+  z-index: 0;
+  animation: gradientShift 8s ease-in-out infinite reverse;
+}
+
+/* CONTENT CONTAINER */
+.about-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 750px;
+  margin: 0 auto;
+  animation: fadeInUp 0.8s cubic-bezier(0.3, 0, 0.8, 0.3) forwards;
+}
+
+/* HEADING */
+.about-content h1 {
+  font-size: clamp(36px, 7vw, 56px);
+  font-weight: 800;
+  margin: 0 0 32px 0;
+  background: linear-gradient(
+    135deg,
+    #7dd3fc 0%,
+    #60a5fa 50%,
+    #ff6fbf 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.2;
+}
+
+/* PARAGRAPHS */
+.about-content p {
+  font-size: clamp(15px, 2vw, 18px);
+  line-height: 1.8;
+  color: rgba(191, 200, 211, 0.95);
+  margin: 0 0 24px 0;
+  font-weight: 300;
+}
+
+.about-content p:last-of-type {
+  margin-bottom: 40px;
+}
+
+/* TEXT LINK */
+.text-link {
+  color: #7dd3fc;
+  text-decoration: none;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(125, 211, 252, 0.5);
+  transition: all 0.3s cubic-bezier(0.3, 0, 0.8, 0.3);
+}
+
+.text-link:hover {
+  color: #ffffff;
+  border-bottom-color: rgba(125, 211, 252, 0.8);
+}
+
+/* CTA SECTION */
+.about-cta {
+  margin-top: 16px;
+}
+
+.cta-link {
+  display: inline-block;
+  padding: 14px 32px;
+  background: linear-gradient(
+    135deg,
+    rgba(125, 211, 252, 0.2) 0%,
+    rgba(125, 211, 252, 0.1) 100%
+  );
+  border: 1.5px solid rgba(125, 211, 252, 0.5);
+  border-radius: 8px;
+  color: #7dd3fc;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.cta-link:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(125, 211, 252, 0.3) 0%,
+    rgba(125, 211, 252, 0.2) 100%
+  );
+  border-color: rgba(125, 211, 252, 0.8);
+  color: #ffffff;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(125, 211, 252, 0.3);
+}
+
+/* ANIMATIONS */
+@keyframes gradientShift {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 900px) {
+  .about {
+    padding: 60px 30px;
+    min-height: auto;
+  }
+
+  .about::before,
+  .about::after {
+    opacity: 0.2;
+  }
+
+  .about-content {
+    max-width: 100%;
+  }
+
+  .about-content h1 {
+    font-size: 40px;
+    margin-bottom: 28px;
+  }
+
+  .about-content p {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .about {
+    padding: 40px 20px;
+  }
+
+  .about::before,
+  .about::after {
+    opacity: 0.08;
+  }
+
+  .about-content h1 {
+    font-size: 32px;
+    margin-bottom: 24px;
+  }
+
+  .about-content p {
+    font-size: 15px;
+    line-height: 1.7;
+    margin-bottom: 18px;
+  }
+
+  .cta-link {
+    padding: 12px 28px;
+    font-size: 12px;
+  }
+}
