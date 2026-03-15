@@ -14,7 +14,7 @@ export default function About() {
         <p>If you want a reliable creative partner to bring structure and quality to your video content.</p>
 
         <div className="about-cta">
-          <a className="cta-link">Get In Touch rohankumar.3rky@gmail.com</a>
+          <button className="cta-link">Get In Touch rohankumar.3rky@gmail.com</button>
         </div>
       </div>
     </section>
