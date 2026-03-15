@@ -31,7 +31,7 @@ export default function Navbar() {
             <div
               className="icon-wrapper"
               onClick={() =>
-                (window.location.href = "mailto:sammie.director@gmail.com")
+                (window.location.href = "mailto:rohankumar.3rky@gmail.com")
               }
             >
               <svg viewBox="0 0 24 24">
